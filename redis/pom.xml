@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>server</artifactId>
+	<artifactId>redis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>server</name>
-	<description>Demo project for Spring Boot RSocket Server</description>
+	<name>redis</name>
+	<description>Demo project for Spring Boot Redis Testcontainers</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -32,17 +32,20 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-rsocket</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-testcontainers</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.projectreactor</groupId>

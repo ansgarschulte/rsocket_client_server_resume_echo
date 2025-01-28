@@ -1,4 +1,4 @@
-package com.example.server;
+package com.example.redis;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

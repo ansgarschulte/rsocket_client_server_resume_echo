@@ -1,17 +1,21 @@
 package com.example.client;
 
 import io.rsocket.core.Resume;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import reactor.core.publisher.Flux;
 
+import java.time.Duration;
 import java.util.List;
 
 @SpringBootApplication
 public class RSocketClientApplication implements CommandLineRunner {
 
+    private static final Logger log = LoggerFactory.getLogger(RSocketClientApplication.class);
     private final RSocketRequester.Builder requesterBuilder;
 
     public RSocketClientApplication(RSocketRequester.Builder requesterBuilder) {
@@ -37,7 +41,13 @@ public class RSocketClientApplication implements CommandLineRunner {
             // Send 10 messages to the server
             List<String> response = requester
                     .route("echo")
-                    .data(Flux.range(1, 10).map(i -> "Hello " + i))
+                    .data(
+                            Flux.range(1, 1000)
+                                    .map(i -> {
+                                        log.info("Sending: " + i);
+                                        return "Hello " + i;
+                                    })
+                                    .delayElements(Duration.ofSeconds(1)))
                     .retrieveFlux(String.class)
                     .collectList()
                     .block();
